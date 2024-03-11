@@ -9,20 +9,19 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"gorm.io/driver/mysql"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 func initDB() *gorm.DB {
-	connectionStr := "root:root@tcp(localhost:3306)/students?charset=utf8mb4&parseTime=True&loc=Local"
-	database, err := gorm.Open(mysql.Open(connectionStr), &gorm.Config{})
+	dsn := "host=localhost user=postgres password=super dbname=gorm port=5432 sslmode=disable"
+	database, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		print(err)
 		return nil
 	}
 
 	database.AutoMigrate(&model.Student{})
-	database.Exec("INSERT IGNORE INTO students VALUES ('aec7e123-233d-4a09-a289-75308ea5b7e6', 'Marko Markovic', 'Graficki dizajn')")
 	return database
 }
 
