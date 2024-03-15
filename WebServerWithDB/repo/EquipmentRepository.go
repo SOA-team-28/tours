@@ -22,7 +22,7 @@ func (repo *EquipmentRepository) FindById(id int) (model.Equipment, error) {
 	return equipment, nil
 }
 
-func (repo *EquipmentRepository) CreateEquipment(equipment *model.Equipment) error {
+func (repo *EquipmentRepository) Create(equipment *model.Equipment) error {
 	dbResult := repo.DatabaseConnection.Create(equipment)
 	if dbResult.Error != nil {
 		return dbResult.Error

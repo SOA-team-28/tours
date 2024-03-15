@@ -5,6 +5,10 @@ import (
 	"gorm.io/gorm"
 )
 
+func NewTourRepository(databaseConnection *gorm.DB) *TourRepository {
+	return &TourRepository{DatabaseConnection: databaseConnection}
+}
+
 type TourRepository struct {
 	DatabaseConnection *gorm.DB
 }
@@ -18,7 +22,7 @@ func (repo *TourRepository) FindById(id int) (model.Tour, error) {
 	return tour, nil
 }
 
-func (repo *TourRepository) CreateTour(tour *model.Tour) error {
+func (repo *TourRepository) Create(tour *model.Tour) error {
 	dbResult := repo.DatabaseConnection.Create(tour)
 	if dbResult.Error != nil {
 		return dbResult.Error

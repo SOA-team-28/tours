@@ -36,7 +36,7 @@ func (handler *EquipmentHandler) Get(writer http.ResponseWriter, req *http.Reque
 		return
 	}
 	log.Printf("Equipment with ID: %d", id)
-	equipment, err := handler.EquipmentService.FindEquipment(id)
+	equipment, err := handler.EquipmentService.Find(id)
 	writer.Header().Set("Content-Type", "application/json")
 	if err != nil {
 		writer.WriteHeader(http.StatusNotFound)

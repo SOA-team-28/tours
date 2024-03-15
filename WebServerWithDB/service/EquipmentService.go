@@ -18,16 +18,16 @@ func NewEquipmentService(db *gorm.DB) *EquipmentService {
     return &EquipmentService{EquipmentRepo: equipmentRepo}
 }
 
-func (service *EquipmentService) FindEquipment(id int) (*model.Equipment, error) {
+func (service *EquipmentService) Find(id int) (*model.Equipment, error) {
 	equipment, err := service.EquipmentRepo.FindById(id)
 	if err != nil {
-		return nil, fmt.Errorf("equipment with id %s not found", id)
+		return nil, fmt.Errorf("equipment with id %d not found", id)
 	}
 	return &equipment, nil
 }
 
 func (service *EquipmentService) Create(equipment *model.Equipment) error {
-	err := service.EquipmentRepo.CreateEquipment(equipment)
+	err := service.EquipmentRepo.Create(equipment)
 	if err != nil {
 		return err
 	}

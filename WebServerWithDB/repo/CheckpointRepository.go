@@ -5,6 +5,10 @@ import (
 	"gorm.io/gorm"
 )
 
+func NewCheckpointRepository(databaseConnection *gorm.DB) *CheckpointRepository {
+	return &CheckpointRepository{DatabaseConnection: databaseConnection}
+}
+
 type CheckpointRepository struct {
 	DatabaseConnection *gorm.DB
 }
@@ -18,7 +22,7 @@ func (repo *CheckpointRepository) FindById(id int) (model.Checkpoint, error) {
 	return checkpoint, nil
 }
 
-func (repo *CheckpointRepository) CreateCheckpoint(checkpoint *model.Checkpoint) error {
+func (repo *CheckpointRepository) Create(checkpoint *model.Checkpoint) error {
 	dbResult := repo.DatabaseConnection.Create(checkpoint)
 	if dbResult.Error != nil {
 		return dbResult.Error

@@ -9,10 +9,22 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func startServer(handler *handler.EquipmentHandler) {
+func startServer() {
+	database := db.InitDB()
+	if database == nil {
+		log.Fatal("FAILED TO CONNECT TO DB")
+	}
+
 	router := mux.NewRouter().StrictSlash(true)
 
-	handler.RegisterRoutes(router)
+	equipmentHandler := handler.NewEquipmentHandler(database)
+	equipmentHandler.RegisterRoutes(router)
+
+	checkpointHandler := handler.NewCheckpointHandler(database)
+	checkpointHandler.RegisterRoutes(router)
+
+	tourHandler := handler.NewTourHandler(database)
+	tourHandler.RegisterRoutes(router)
 
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./static")))
 	println("Server starting")
@@ -20,13 +32,7 @@ func startServer(handler *handler.EquipmentHandler) {
 }
 
 func main() {
-	database := db.InitDB()
-	if database == nil {
-		log.Fatal("FAILED TO CONNECT TO DB")
-	}
 
 
-	equipmentHandler := handler.NewEquipmentHandler(database)
-
-	startServer(equipmentHandler)
+	startServer()
 }
