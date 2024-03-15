@@ -4,10 +4,18 @@ import (
 	"database-example/model"
 	"database-example/repo"
 	"fmt"
+
+	"gorm.io/gorm"
 )
 
 type EquipmentService struct {
-	EquipmentRepo *repo.EquipmentRepository
+    EquipmentRepo *repo.EquipmentRepository
+}
+
+
+func NewEquipmentService(db *gorm.DB) *EquipmentService {
+    equipmentRepo := repo.NewEquipmentRepository(db) 
+    return &EquipmentService{EquipmentRepo: equipmentRepo}
 }
 
 func (service *EquipmentService) FindEquipment(id int) (*model.Equipment, error) {

@@ -5,6 +5,10 @@ import (
 	"gorm.io/gorm"
 )
 
+func NewEquipmentRepository(databaseConnection *gorm.DB) *EquipmentRepository {
+	return &EquipmentRepository{DatabaseConnection: databaseConnection}
+}
+
 type EquipmentRepository struct {
 	DatabaseConnection *gorm.DB
 }

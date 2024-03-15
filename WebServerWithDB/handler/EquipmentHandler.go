@@ -9,10 +9,21 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
+	"gorm.io/gorm"
 )
 
 type EquipmentHandler struct {
-	EquipmentService *service.EquipmentService
+    EquipmentService *service.EquipmentService
+}
+
+func NewEquipmentHandler(db *gorm.DB) *EquipmentHandler {
+    equipmentService := service.NewEquipmentService(db)
+    return &EquipmentHandler{EquipmentService: equipmentService}
+}
+
+func (h *EquipmentHandler) RegisterRoutes(router *mux.Router) {
+	router.HandleFunc("/equipments/{id}", h.Get).Methods("GET")
+	router.HandleFunc("/equipments", h.Create).Methods("POST")
 }
 
 func (handler *EquipmentHandler) Get(writer http.ResponseWriter, req *http.Request) {
@@ -43,7 +54,7 @@ func (handler *EquipmentHandler) Create(writer http.ResponseWriter, req *http.Re
 		writer.WriteHeader(http.StatusBadRequest)
 		return
 	}
-	
+
 	equipment.ID = int(equipment.ID)
 
 	err = handler.EquipmentService.Create(&equipment)
