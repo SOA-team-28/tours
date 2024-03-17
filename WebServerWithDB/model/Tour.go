@@ -2,6 +2,14 @@ package model
 
 import "time"
 
+type ExecutionStatus int
+
+const (
+	Completed ExecutionStatus = iota
+	Abandoned
+	InProgress
+)
+
 type Equipment struct {
 	ID          int    `json:"id"`
 	Name        string `json:"name"`
@@ -44,7 +52,25 @@ type TourRatingPreview struct {
 	Rating       int       `json:"rating"`
 	Comment      string    `json:"comment"`
 	TouristID    int       `json:"touristId"`
+	TourID       int       `json:"tourId"`
 	TourDate     time.Time `json:"tourDate"`
 	CreationDate time.Time `json:"creationDate"`
 	ImageNames   []string  `json:"imageNames"`
+}
+
+type CheckpointCompletition struct {
+	ID               int       `json:"id"`
+	TourExecutionID  int       `json:"touristId"`
+	CheckpointID     int       `json:"tourId"`
+	CompletitionTime time.Time `json:"start"`
+}
+
+type TourExecution struct {
+	ID                   int             `json:"id"`
+	TouristID            int             `json:"touristId"`
+	TourID               int             `json:"tourId"`
+	Start                time.Time       `json:"start"`
+	LastActivity         time.Time       `json:"lastActivity"`
+	ExecutionStatus      ExecutionStatus `json:"executionStatus"`
+	CompletedCheckpoints []int           `json:"completedCheckpoints"`
 }

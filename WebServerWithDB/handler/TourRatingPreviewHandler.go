@@ -54,6 +54,11 @@ func (handler *TourRatingPreviewHandler) Create(writer http.ResponseWriter, req 
 		return
 	}
 
+	if tourRatingPreview.TourID == 0 || tourRatingPreview.TouristID == 0 || tourRatingPreview.Rating == 0 || tourRatingPreview.Rating > 5 {
+		http.Error(writer, "Fill all the fields properly.", http.StatusBadRequest)
+		return
+	}
+
 	tourRatingPreview.ID = int(tourRatingPreview.ID)
 
 	err = handler.TourRatingPreviewService.Create(&tourRatingPreview)

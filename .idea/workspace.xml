@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b8812fa-5969-4866-a255-74f069df8e97" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/WebServerWithDB/handler/TourRatingPreviewHandler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebServerWithDB/repo/TourRatingPreviewRepository.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebServerWithDB/service/TourRatingPreviewService.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebServerWithDB/handler/TourRatingPreviewHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/WebServerWithDB/handler/TourRatingPreviewHandler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebServerWithDB/model/Tour.go" beforeDir="false" afterPath="$PROJECT_DIR$/WebServerWithDB/model/Tour.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
