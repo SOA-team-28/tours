@@ -36,3 +36,4 @@ type Tour struct {
 	TourRatings    string `json:"tourRatings"`
 	Closed         bool   `json:"closed"`
 }
+
