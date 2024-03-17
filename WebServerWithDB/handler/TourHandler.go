@@ -55,33 +55,16 @@ func (handler *TourHandler) Create(writer http.ResponseWriter, req *http.Request
 		return
 	}
 
-	tour, equipment, checkpoints := tourDTO.MapToTour()
+	tour, _, _ := tourDTO.MapToTour()
 
-	// Now you have tour, equipment, and checkpoints to work with
 
-		// Print all mapped fields
-		log.Println("Tour:")
-		log.Printf("ID: %d", tour.ID)
-		log.Printf("Name: %s", tour.Name)
-		log.Printf("Description: %s", tour.Description)
-		log.Printf("DemandingLevel: %s", tour.DemandingLevel)
-		log.Printf("Price: %d", tour.Price)
-		log.Printf("Tags: %v", tour.Tags)
-		log.Printf("AuthorID: %d", tour.AuthorID)
-		log.Printf("Status: %s", tour.Status)
-		log.Printf("TourTimes: %v", tour.TourTimes)
-		log.Printf("TourRatings: %v", tour.TourRatings)
-		log.Printf("Closed: %t", tour.Closed)
-	
-		log.Println("Equipment:")
-		for _, e := range equipment {
-			log.Printf("ID: %d, Name: %s, Description: %s", e.ID, e.Name, e.Description)
-		}
-	
-		log.Println("Checkpoints:")
-		for _, c := range checkpoints {
-			log.Printf("ID: %d, TourID: %d, AuthorID: %d, Longitude: %f, Latitude: %f, Name: %s, Description: %s, Pictures: %s, RequiredTime: %d, CheckpointSecret: %s, EncounterID: %d, IsSecretPrerequisite: %t", c.ID, c.TourID, c.AuthorID, c.Longitude, c.Latitude, c.Name, c.Description, c.Pictures, c.RequiredTime, c.CheckpointSecret, c.EncounterID, c.IsSecretPrerequisite)
-		}
+
+	err = handler.TourService.Create(&tour)
+	if err != nil {
+		log.Println("Error while creating new tour:", err)
+		writer.WriteHeader(http.StatusInternalServerError)
+		return
+	}
 		
 	writer.WriteHeader(http.StatusCreated)
 	writer.Header().Set("Content-Type", "application/json")

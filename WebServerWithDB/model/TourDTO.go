@@ -35,19 +35,6 @@ type TourDTO struct {
 }
 
 func (tourDTO *TourDTO) MapToTour() (Tour, []Equipment, []Checkpoint) {
-	tour := Tour{
-		ID:             tourDTO.ID,
-		Name:           tourDTO.Name,
-		Description:    tourDTO.Description,
-		DemandingLevel: tourDTO.DemandingLevel,
-		Price:          tourDTO.Price,
-		Tags:           strings.Join(tourDTO.Tags, "|"),
-		AuthorID:       tourDTO.AuthorID,
-		Status:         tourDTO.Status,
-		TourTimes:      "TODO",
-		TourRatings:    "TODO",
-		Closed:         tourDTO.Closed,
-	}
 
 	var equipment []Equipment
 	for _, eq := range tourDTO.Equipment {
@@ -74,6 +61,22 @@ func (tourDTO *TourDTO) MapToTour() (Tour, []Equipment, []Checkpoint) {
 			EncounterID:          cp.EncounterID,
 			IsSecretPrerequisite: cp.IsSecretPrerequisite,
 		})
+	}
+
+	tour := Tour{
+		ID:             tourDTO.ID,
+		Name:           tourDTO.Name,
+		Description:    tourDTO.Description,
+		DemandingLevel: tourDTO.DemandingLevel,
+		Price:          tourDTO.Price,
+		Tags:           strings.Join(tourDTO.Tags, "|"),
+		AuthorID:       tourDTO.AuthorID,
+		Status:         tourDTO.Status,
+		Checkpoints:    checkpoints,	
+		Equipment:      equipment,	
+		TourTimes:      "TODO",
+		TourRatings:    "TODO",
+		Closed:         tourDTO.Closed,
 	}
 
 	return tour, equipment, checkpoints

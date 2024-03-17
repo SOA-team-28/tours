@@ -14,12 +14,12 @@ type TourRepository struct {
 }
 
 func (repo *TourRepository) FindById(id int) (model.Tour, error) {
-	tour := model.Tour{}
-	dbResult := repo.DatabaseConnection.First(&tour, "id = ?", id)
-	if dbResult.Error != nil {
-		return tour, dbResult.Error
-	}
-	return tour, nil
+    tour := model.Tour{}
+    dbResult := repo.DatabaseConnection.Preload("Equipment").Preload("Checkpoints").First(&tour, "id = ?", id)
+    if dbResult.Error != nil {
+        return tour, dbResult.Error
+    }
+    return tour, nil
 }
 
 func (repo *TourRepository) Create(tour *model.Tour) error {

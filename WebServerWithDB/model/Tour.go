@@ -1,13 +1,23 @@
 package model
 
-type Equipment struct {
-	ID          int    `json:"id"`
-	Name        string `json:"name"`
-	Description string `json:"description"`
+type Tour struct {
+	ID             int          `gorm:"primaryKey" json:"id"`
+	Name           string       `json:"name"`
+	Description    string       `json:"description"`
+	DemandingLevel string       `json:"demandignessLevel"`
+	Price          int          `json:"price"`
+	Tags           string       `json:"tags"`
+	AuthorID       int          `json:"authorId"`
+	Status         string       `json:"status"`
+	Equipment      []Equipment  `gorm:"many2many:tour_equipments;" json:"equipment"`
+	Checkpoints    []Checkpoint `gorm:"many2many:tour_checkpoints;" json:"checkpoints"`
+	TourTimes      string     `json:"tourTimes"`
+	TourRatings    string     `json:"tourRatings"`
+	Closed         bool         `json:"closed"`
 }
 
 type Checkpoint struct {
-	ID                   int     `json:"id"`
+	ID                   int     `gorm:"primaryKey" json:"id"`
 	TourID               int     `json:"tourId"`
 	AuthorID             int     `json:"authorId"`
 	Longitude            float64 `json:"longitude"`
@@ -21,19 +31,18 @@ type Checkpoint struct {
 	IsSecretPrerequisite bool    `json:"isSecretPrerequisite"`
 }
 
-type Tour struct {
-	ID             int    `json:"id"`
-	Name           string `json:"name"`
-	Description    string `json:"description"`
-	DemandingLevel string `json:"demandignessLevel"`
-	Price          int    `json:"price"`
-	Tags           string `json:"tags"`
-	AuthorID       int    `json:"authorId"`
-	Status         string `json:"status"`
-	Equipment      string `json:"equipment"`
-	Checkpoints    string `json:"checkpoints"`
-	TourTimes      string `json:"tourTimes"`
-	TourRatings    string `json:"tourRatings"`
-	Closed         bool   `json:"closed"`
+type Equipment struct {
+	ID          int    `gorm:"primaryKey" json:"id"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
 }
 
+type TourCheckpoint struct {
+	TourID       int  `json:"tourId"`
+	CheckpointID int `json:"checkpointId"`
+}
+
+type TourEquipment struct {
+	TourID      int  `json:"tourId"`
+	EquipmentID int `json:"equipmentId"`
+}
