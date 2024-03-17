@@ -1,5 +1,7 @@
 package model
 
+import "time"
+
 type Equipment struct {
 	ID          int    `json:"id"`
 	Name        string `json:"name"`
@@ -35,4 +37,14 @@ type Tour struct {
 	TourTimes      string `json:"tourTimes"`
 	TourRatings    string `json:"tourRatings"`
 	Closed         bool   `json:"closed"`
+}
+
+type TourRatingPreview struct {
+	ID           int       `json:"id"`
+	Rating       int       `json:"rating"`
+	Comment      string    `json:"comment"`
+	TouristID    int       `json:"touristId"`
+	TourDate     time.Time `json:"tourDate"`
+	CreationDate time.Time `json:"creationDate"`
+	ImageNames   []string  `json:"imageNames"`
 }
