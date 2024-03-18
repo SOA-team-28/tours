@@ -47,15 +47,17 @@ func (handler *TourHandler) Get(writer http.ResponseWriter, req *http.Request) {
 }
 
 func (handler *TourHandler) Create(writer http.ResponseWriter, req *http.Request) {
-	var tour model.Tour
-	err := json.NewDecoder(req.Body).Decode(&tour)
+	var tourDTO model.TourDTO
+	err := json.NewDecoder(req.Body).Decode(&tourDTO)
 	if err != nil {
 		log.Println("Error while parsing JSON:", err)
 		writer.WriteHeader(http.StatusBadRequest)
 		return
 	}
 
-	tour.ID = int(tour.ID)
+	tour, _, _ := tourDTO.MapToTour()
+
+
 
 	err = handler.TourService.Create(&tour)
 	if err != nil {
@@ -63,6 +65,9 @@ func (handler *TourHandler) Create(writer http.ResponseWriter, req *http.Request
 		writer.WriteHeader(http.StatusInternalServerError)
 		return
 	}
+		
 	writer.WriteHeader(http.StatusCreated)
 	writer.Header().Set("Content-Type", "application/json")
 }
+
+
