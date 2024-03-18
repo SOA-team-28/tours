@@ -42,8 +42,9 @@ func (handler *TourHandler) Get(writer http.ResponseWriter, req *http.Request) {
 		writer.WriteHeader(http.StatusNotFound)
 		return
 	}
+	tourDTO := model.TourToDTO(tour)
 	writer.WriteHeader(http.StatusOK)
-	json.NewEncoder(writer).Encode(tour)
+	json.NewEncoder(writer).Encode(tourDTO)
 }
 
 func (handler *TourHandler) Create(writer http.ResponseWriter, req *http.Request) {
