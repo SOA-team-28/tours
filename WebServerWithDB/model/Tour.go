@@ -7,7 +7,7 @@ type Tour struct {
 	Name           string       `json:"name"`
 	Description    string       `json:"description"`
 	DemandingLevel string       `json:"demandignessLevel"`
-	Price          int          `json:"price"`
+	Price          float64       `json:"price"`
 	Tags           string       `json:"tags"`
 	AuthorID       int          `json:"authorId"`
 	Status         string       `json:"status"`

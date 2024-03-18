@@ -66,7 +66,11 @@ func (handler *TourHandler) Create(writer http.ResponseWriter, req *http.Request
 		writer.WriteHeader(http.StatusInternalServerError)
 		return
 	}
-		
+	
+	tourDTO = model.TourToDTO(&tour)
+	writer.WriteHeader(http.StatusOK)
+	json.NewEncoder(writer).Encode(tourDTO)
+
 	writer.WriteHeader(http.StatusCreated)
 	writer.Header().Set("Content-Type", "application/json")
 }
