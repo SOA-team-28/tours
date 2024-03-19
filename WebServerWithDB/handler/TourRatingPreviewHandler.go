@@ -64,7 +64,14 @@ func (handler *TourRatingPreviewHandler) Create(writer http.ResponseWriter, req 
 	//_tourOwnershipService.GetPurchasedToursByUser
 	//_executionRepository.GetExactExecution - IsTourProgressAbove35Percent(), HasOneWeekPassedSinceLastActivity()
 
-	tourRatingPreview := tourRatingPreviewDTO.MapToTourRatingPreview()
+	tourService := &service.TourService{}
+	tour, _ := tourService.Find(tourRatingPreviewDTO.TourID)
+	var tourModel model.Tour
+	if tour != nil {
+		tourModel = *tour
+	}
+
+	tourRatingPreview := tourRatingPreviewDTO.MapToTourRatingPreview(tourModel)
 
 	err = handler.TourRatingPreviewService.Create(&tourRatingPreview)
 	if err != nil {

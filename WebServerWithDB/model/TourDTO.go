@@ -1,8 +1,6 @@
 package model
 
 import (
-	"database-example/service"
-
 	"strings"
 	"time"
 )
@@ -50,21 +48,14 @@ type TourRatingPreviewDTO struct {
 	ImageNames   []string  `json:"imageNames"`
 }
 
-func (tourRatingPreviewDTO *TourRatingPreviewDTO) MapToTourRatingPreview() TourRatingPreview {
-
-	tourService := &service.TourService{}
-	tour, _ := tourService.Find(tourRatingPreviewDTO.TourID)
-	var tourModel Tour
-	if tour != nil {
-		tourModel = *tour
-	}
+func (tourRatingPreviewDTO *TourRatingPreviewDTO) MapToTourRatingPreview(tour Tour) TourRatingPreview {
 
 	tourRatingPreview := TourRatingPreview{
 		ID:           tourRatingPreviewDTO.ID,
 		Rating:       tourRatingPreviewDTO.Rating,
 		Comment:      tourRatingPreviewDTO.Comment,
 		TouristID:    tourRatingPreviewDTO.TouristID,
-		Tour:         tourModel,
+		Tour:         tour,
 		TourDate:     tourRatingPreviewDTO.TourDate,
 		CreationDate: tourRatingPreviewDTO.CreationDate,
 		ImageNames:   strings.Join(tourRatingPreviewDTO.ImageNames, "|"),

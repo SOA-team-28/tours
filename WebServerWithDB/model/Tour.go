@@ -65,5 +65,6 @@ type TourRatingPreview struct {
 	CreationDate time.Time `json:"creationDate"`
 	ImageNames   string    `json:"imageNames"`
 	TouristID    int       `json:"touristId"`
-	Tour         Tour      `gorm:"foreignKey:Tour"`
+	TourID       int       `json:"tourId"`
+	Tour         Tour      `gorm:"foreignKey:TourID"`
 }

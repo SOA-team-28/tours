@@ -6,11 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="1b8812fa-5969-4866-a255-74f069df8e97" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebServerWithDB/db/init.go" beforeDir="false" afterPath="$PROJECT_DIR$/WebServerWithDB/db/init.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebServerWithDB/handler/TourRatingPreviewHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/WebServerWithDB/handler/TourRatingPreviewHandler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebServerWithDB/model/Tour.go" beforeDir="false" afterPath="$PROJECT_DIR$/WebServerWithDB/model/Tour.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebServerWithDB/model/TourDTO.go" beforeDir="false" afterPath="$PROJECT_DIR$/WebServerWithDB/model/TourDTO.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebServerWithDB/service/TourService.go" beforeDir="false" afterPath="$PROJECT_DIR$/WebServerWithDB/service/TourService.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
