@@ -24,6 +24,7 @@ func NewEquipmentHandler(db *gorm.DB) *EquipmentHandler {
 func (h *EquipmentHandler) RegisterRoutes(router *mux.Router) {
 	router.HandleFunc("/equipments/{id}", h.Get).Methods("GET")
 	router.HandleFunc("/equipments", h.Create).Methods("POST")
+	router.HandleFunc("/equipments/available/{tourId}", h.GetAvailableEquipment).Methods("POST")
 }
 
 func (handler *EquipmentHandler) Get(writer http.ResponseWriter, req *http.Request) {
@@ -65,4 +66,35 @@ func (handler *EquipmentHandler) Create(writer http.ResponseWriter, req *http.Re
 	}
 	writer.WriteHeader(http.StatusCreated)
 	writer.Header().Set("Content-Type", "application/json")
+}
+
+func (handler *EquipmentHandler) GetAvailableEquipment(writer http.ResponseWriter, req *http.Request) {
+	// Parse tour ID from URL parameters
+	params := mux.Vars(req)
+	tourIDString := params["tourId"]
+	tourID, err := strconv.Atoi(tourIDString)
+	if err != nil {
+		log.Println("Error parsing tour ID:", err)
+		writer.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	var equipmentIDs []int
+	err = json.NewDecoder(req.Body).Decode(&equipmentIDs)
+	if err != nil {
+		log.Println("Error decoding equipment IDs:", err)
+		writer.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	availableEquipment, err := handler.EquipmentService.GetAvailableEquipment(tourID, equipmentIDs)
+	if err != nil {
+		log.Println("Error retrieving available equipment:", err)
+		writer.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	writer.Header().Set("Content-Type", "application/json")
+	writer.WriteHeader(http.StatusOK)
+	json.NewEncoder(writer).Encode(availableEquipment)
 }

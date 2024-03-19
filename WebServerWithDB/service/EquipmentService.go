@@ -33,3 +33,11 @@ func (service *EquipmentService) Create(equipment *model.Equipment) error {
 	}
 	return nil
 }
+
+func (service *EquipmentService) GetAvailableEquipment(tourID int, excludedEquipmentIDs []int) ([]model.Equipment, error) {
+	availableEquipment, err := service.EquipmentRepo.FindAvailableByTourID(tourID, excludedEquipmentIDs)
+	if err != nil {
+		return nil, err
+	}
+	return availableEquipment, nil
+}
