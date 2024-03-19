@@ -46,27 +46,40 @@ func (handler *TourRatingPreviewHandler) Get(writer http.ResponseWriter, req *ht
 }
 
 func (handler *TourRatingPreviewHandler) Create(writer http.ResponseWriter, req *http.Request) {
-	var tourRatingPreview model.TourRatingPreview
-	err := json.NewDecoder(req.Body).Decode(&tourRatingPreview)
+
+	var tourRatingPreviewDTO model.TourRatingPreviewDTO
+	err := json.NewDecoder(req.Body).Decode(&tourRatingPreviewDTO)
 	if err != nil {
 		log.Println("Error while parsing JSON:", err)
 		writer.WriteHeader(http.StatusBadRequest)
 		return
 	}
 
-	if tourRatingPreview.TourID == 0 || tourRatingPreview.TouristID == 0 || tourRatingPreview.Rating == 0 || tourRatingPreview.Rating > 5 {
+	if tourRatingPreviewDTO.TourID == 0 || tourRatingPreviewDTO.TouristID == 0 || tourRatingPreviewDTO.Rating == 0 || tourRatingPreviewDTO.Rating > 5 {
 		http.Error(writer, "Fill all the fields properly.", http.StatusBadRequest)
 		return
 	}
 
-	tourRatingPreview.ID = int(tourRatingPreview.ID)
+	// sprovesti sledece validacije kad to bude moguce
+	//_tourOwnershipService.GetPurchasedToursByUser
+	//_executionRepository.GetExactExecution - IsTourProgressAbove35Percent(), HasOneWeekPassedSinceLastActivity()
+
+	tourRatingPreview := tourRatingPreviewDTO.MapToTourRatingPreview()
 
 	err = handler.TourRatingPreviewService.Create(&tourRatingPreview)
 	if err != nil {
-		log.Println("Error while creating new checkpoint:", err)
+		log.Println("Error while creating new tour rating preview:", err)
 		writer.WriteHeader(http.StatusInternalServerError)
 		return
 	}
+
 	writer.WriteHeader(http.StatusCreated)
+	responseBody, err := json.Marshal(tourRatingPreview)
+	if err != nil {
+		log.Println("Error marshaling TourRatingPreview:", err)
+		writer.WriteHeader(http.StatusInternalServerError)
+		return
+	}
 	writer.Header().Set("Content-Type", "application/json")
+	writer.Write(responseBody)
 }
