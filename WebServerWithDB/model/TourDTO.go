@@ -11,7 +11,7 @@ type CheckpointDTO struct {
 	Name                 string   `json:"name"`
 	Description          string   `json:"description"`
 	Pictures             []string `json:"pictures"`
-	RequiredTime         int      `json:"requiredTimeInSeconds"`
+	RequiredTime         float64      `json:"requiredTimeInSeconds"`
 	CheckpointSecret     string   `json:"checkpointSecret"`
 	EncounterID          int      `json:"encounterId"`
 	IsSecretPrerequisite bool     `json:"isSecretPrerequisite"`

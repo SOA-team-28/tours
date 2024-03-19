@@ -30,3 +30,20 @@ func (repo *TourRepository) Create(tour *model.Tour) error {
 	println("Rows affected: ", dbResult.RowsAffected)
 	return nil
 }
+
+func (repo *TourRepository) Update(tour *model.Tour) error {
+	dbResult := repo.DatabaseConnection.Save(tour)
+	if dbResult.Error != nil {
+		return dbResult.Error
+	}
+	return nil
+}
+
+func (repo *TourRepository) Delete(id int) error {
+	dbResult := repo.DatabaseConnection.Delete(&model.Tour{}, id)
+	if dbResult.Error != nil {
+		return dbResult.Error
+	}
+	println("Rows affected: ", dbResult.RowsAffected)
+	return nil
+}

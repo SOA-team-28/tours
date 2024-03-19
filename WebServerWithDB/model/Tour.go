@@ -7,7 +7,7 @@ type Tour struct {
 	Name           string       `json:"name"`
 	Description    string       `json:"description"`
 	DemandingLevel string       `json:"demandignessLevel"`
-	Price          float64       `json:"price"`
+	Price          float64      `json:"price"`
 	Tags           string       `json:"tags"`
 	AuthorID       int          `json:"authorId"`
 	Status         string       `json:"status"`
@@ -27,7 +27,7 @@ type Checkpoint struct {
 	Name                 string  `json:"name"`
 	Description          string  `json:"description"`
 	Pictures             string  `json:"pictures"`
-	RequiredTime         int     `json:"requiredTimeInSeconds"`
+	RequiredTime         float64     `json:"requiredTimeInSeconds"`
 	CheckpointSecret     string  `json:"checkpointSecret"`
 	EncounterID          int     `json:"encounterId"`
 	IsSecretPrerequisite bool    `json:"isSecretPrerequisite"`
@@ -81,6 +81,14 @@ func TourToDTO(tour *Tour) TourDTO {
 			EncounterID:          cp.EncounterID,
 			IsSecretPrerequisite: cp.IsSecretPrerequisite,
 		})
+	}
+
+	// Initialize Equipment and Checkpoints as empty slices if they are nil
+	if equipmentDTOs == nil {
+		equipmentDTOs = make([]Equipment, 0)
+	}
+	if checkpointDTOs == nil {
+		checkpointDTOs = make([]CheckpointDTO, 0)
 	}
 
 	return TourDTO{

@@ -32,3 +32,19 @@ func (service *TourService) Create(tour *model.Tour) error {
 	}
 	return nil
 }
+
+func (service *TourService) Update(tour *model.Tour) error {
+	err := service.TourRepo.Update(tour)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (service *TourService) Delete(id int) error {
+	err := service.TourRepo.Delete(id)
+	if err != nil {
+		return err
+	}
+	return nil
+}
