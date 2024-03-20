@@ -15,6 +15,15 @@ func NewTourPreferenceService(db *gorm.DB) *TourPreferenceService {
 	return &TourPreferenceService{TourPreferenceRepo: tourPreferenceRepo}
 }
 
+func (service *TourPreferenceService) FindByCreatorId(id int) ([]model.TourPreference, error) {
+	tourPreferences, err := service.TourPreferenceRepo.FindByCreatorId(id)
+	if err != nil {
+		// Obrada greške ako se dogodi prilikom poziva repozitorijuma
+		return nil, err
+	}
+	return tourPreferences, nil
+}
+
 func (service *TourPreferenceService) FindAll() ([]model.TourPreference, error) {
 	return service.TourPreferenceRepo.FindAll()
 }
