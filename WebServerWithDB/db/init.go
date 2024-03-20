@@ -23,7 +23,8 @@ func InitDB() *gorm.DB {
 		&model.Checkpoint{},
 		&model.Equipment{},
 		&model.Tour{},
-		&model.MapObject{})
+		&model.MapObject{},
+		&model.TourPreference{})
 
 	if err != nil {
 		print(err)

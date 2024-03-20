@@ -46,6 +46,43 @@ type MapObjectDTO struct {
 	Latitude    float64 `json:"latitude"`
 }
 
+type TourPreferenceDTO struct {
+	ID             int      `json:"id"`
+	CreatorId      int      `json:"creatorId"`
+	TourDifficulty string   `json:"tourDifficulty"`
+	Walk           int      `json:"walk"`
+	Bike           int      `json:"bike"`
+	Car            int      `json:"car"`
+	Boat           int      `json:"boat"`
+	Tags           []string `json:"tags"`
+}
+
+func (tourPreferenceDto *TourPreferenceDTO) MapToTourPreference() TourPreference {
+	var tourDifficulty TourDifficulty
+
+	switch tourPreferenceDto.TourDifficulty {
+	case "Easy":
+		tourDifficulty = Easy
+	case "Medium":
+		tourDifficulty = Medium
+	default:
+		tourDifficulty = Hard
+	}
+
+	tourPreference := TourPreference{
+		ID:             tourPreferenceDto.ID,
+		CreatorId:      tourPreferenceDto.CreatorId,
+		TourDifficulty: tourDifficulty,
+		Walk:           tourPreferenceDto.Walk,
+		Bike:           tourPreferenceDto.Bike,
+		Car:            tourPreferenceDto.Car,
+		Boat:           tourPreferenceDto.Bike,
+		Tags:           strings.Join(tourPreferenceDto.Tags, "|"),
+	}
+
+	return tourPreference
+}
+
 func (mapObjectDto *MapObjectDTO) MapToMapObject() MapObject {
 	var category MapObjectType
 

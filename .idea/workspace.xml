@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f946cd2f-de94-4350-afbd-af13f2e5f301" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/WebServerWithDB/handler/TourPreferenceHandler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WebServerWithDB/repo/TourPreferenceRepository.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WebServerWithDB/service/TourPreferenceService.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebServerWithDB/handler/MapObjectHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/WebServerWithDB/handler/MapObjectHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebServerWithDB/service/MapObjectService.go" beforeDir="false" afterPath="$PROJECT_DIR$/WebServerWithDB/service/MapObjectService.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebServerWithDB/db/init.go" beforeDir="false" afterPath="$PROJECT_DIR$/WebServerWithDB/db/init.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebServerWithDB/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/WebServerWithDB/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebServerWithDB/model/Tour.go" beforeDir="false" afterPath="$PROJECT_DIR$/WebServerWithDB/model/Tour.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebServerWithDB/model/TourDTO.go" beforeDir="false" afterPath="$PROJECT_DIR$/WebServerWithDB/model/TourDTO.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +33,7 @@
   "keyToString": {
     "DefaultGoTemplateProperty": "Go File",
     "Go Build.go build database-example.executor": "Debug",
-    "git-widget-placeholder": "feat/map-objects"
+    "git-widget-placeholder": "feat/tour-preferences"
   }
 }]]></component>
   <component name="RunManager">
