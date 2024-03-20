@@ -27,6 +27,10 @@ func (service *MapObjectService) Find(id int) (*model.MapObject, error) {
 	return &mapObject, nil
 }
 
+func (service *MapObjectService) FindAll() ([]model.MapObject, error) {
+	return service.MapObjectRepo.FindAll()
+}
+
 func (service *MapObjectService) Create(mapObject *model.MapObject, userId int, status string) *model.MapObjectDTO {
 	createdMapObject, _ := service.MapObjectRepo.Create(mapObject)
 	createdMapObjectDTO := createdMapObject.MapToMapObjectDTO()

@@ -22,6 +22,15 @@ func (repo *MapObjectRepository) FindById(id int) (model.MapObject, error) {
 	return mapObject, nil
 }
 
+func (repo *MapObjectRepository) FindAll() ([]model.MapObject, error) {
+	var mapObjects []model.MapObject
+	dbResult := repo.DatabaseConnection.Find(&mapObjects)
+	if dbResult.Error != nil {
+		return nil, dbResult.Error
+	}
+	return mapObjects, nil
+}
+
 func (repo *MapObjectRepository) Create(mapObject *model.MapObject) (*model.MapObject, error) {
 	dbResult := repo.DatabaseConnection.Create(mapObject)
 	if dbResult.Error != nil {

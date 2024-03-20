@@ -23,6 +23,7 @@ func NewMapObjectHandler(db *gorm.DB) *MapObjectHandler {
 
 func (h *MapObjectHandler) RegisterRoutes(router *mux.Router) {
 	router.HandleFunc("/mapObjects/{id}", h.Get).Methods("GET")
+	router.HandleFunc("/mapObjects-get-all", h.GetAll).Methods("GET")
 	router.HandleFunc("/mapObjects/{userId}/{status}", h.Create).Methods("POST")
 }
 
@@ -44,6 +45,19 @@ func (handler *MapObjectHandler) Get(writer http.ResponseWriter, req *http.Reque
 	}
 	writer.WriteHeader(http.StatusOK)
 	json.NewEncoder(writer).Encode(mapObject)
+}
+
+func (handler *MapObjectHandler) GetAll(writer http.ResponseWriter, req *http.Request) {
+	mapObjects, err := handler.MapObjectService.FindAll()
+	if err != nil {
+		log.Println("Error retrieving MapObjects:", err)
+		writer.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	writer.Header().Set("Content-Type", "application/json")
+	writer.WriteHeader(http.StatusOK)
+	json.NewEncoder(writer).Encode(mapObjects)
 }
 
 func (handler *MapObjectHandler) Create(writer http.ResponseWriter, req *http.Request) {
