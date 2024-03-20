@@ -31,7 +31,7 @@ func (service *MapObjectService) FindAll() ([]model.MapObject, error) {
 	return service.MapObjectRepo.FindAll()
 }
 
-func (service *MapObjectService) Create(mapObject *model.MapObject, userId int, status string) *model.MapObjectDTO {
+func (service *MapObjectService) Create(mapObject *model.MapObject, userId int, status string /*, token string*/) *model.MapObjectDTO {
 	createdMapObject, _ := service.MapObjectRepo.Create(mapObject)
 	createdMapObjectDTO := createdMapObject.MapToMapObjectDTO()
 
@@ -51,6 +51,9 @@ func (service *MapObjectService) Create(mapObject *model.MapObject, userId int, 
 
 		// Postavljanje zaglavlja zahteva, ako je potrebno
 		req.Header.Set("Content-Type", "application/json")
+		//req.Header.Set("Authorization", "Bearer "+token) // Dodavanje JWT tokena u zaglavlje
+
+		// Slanje zahteva
 
 		// Slanje zahteva
 		client := &http.Client{}
