@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f946cd2f-de94-4350-afbd-af13f2e5f301" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebServerWithDB/handler/TourPreferenceHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/WebServerWithDB/handler/TourPreferenceHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebServerWithDB/repo/MapObjectRepository.go" beforeDir="false" afterPath="$PROJECT_DIR$/WebServerWithDB/repo/MapObjectRepository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebServerWithDB/repo/TourPreferenceRepository.go" beforeDir="false" afterPath="$PROJECT_DIR$/WebServerWithDB/repo/TourPreferenceRepository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebServerWithDB/service/TourPreferenceService.go" beforeDir="false" afterPath="$PROJECT_DIR$/WebServerWithDB/service/TourPreferenceService.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebServerWithDB/model/Tour.go" beforeDir="false" afterPath="$PROJECT_DIR$/WebServerWithDB/model/Tour.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebServerWithDB/model/TourDTO.go" beforeDir="false" afterPath="$PROJECT_DIR$/WebServerWithDB/model/TourDTO.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

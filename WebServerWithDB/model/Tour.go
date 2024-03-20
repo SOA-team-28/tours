@@ -77,20 +77,20 @@ type TourEquipment struct {
 }
 
 type TourPreference struct {
-	ID             int            `gorm:"primaryKey" json:"id"`
-	CreatorId      int            `json:"creatorId"`
-	TourDifficulty TourDifficulty `json:"tourDifficulty"`
-	Walk           int            `json:"walk"`
-	Bike           int            `json:"bike"`
-	Car            int            `json:"car"`
-	Boat           int            `json:"boat"`
-	Tags           string         `json:"tags"`
+	ID         int            `gorm:"primaryKey" json:"id"`
+	CreatorId  int            `json:"creatorId"`
+	Difficulty TourDifficulty `json:"difficulty"`
+	Walk       int            `json:"walk"`
+	Bike       int            `json:"bike"`
+	Car        int            `json:"car"`
+	Boat       int            `json:"boat"`
+	Tags       string         `json:"tags"`
 }
 
 func (tourPreference *TourPreference) MapToTourPreferenceDTO() TourPreferenceDTO {
 	var tourDifficulty string
 
-	switch tourPreference.TourDifficulty {
+	switch tourPreference.Difficulty {
 	case Easy:
 		tourDifficulty = "Easy"
 	case Medium:
@@ -100,14 +100,14 @@ func (tourPreference *TourPreference) MapToTourPreferenceDTO() TourPreferenceDTO
 	}
 
 	tourPreferenceDTO := TourPreferenceDTO{
-		ID:             tourPreference.ID,
-		CreatorId:      tourPreference.CreatorId,
-		TourDifficulty: tourDifficulty,
-		Walk:           tourPreference.Walk,
-		Bike:           tourPreference.Bike,
-		Car:            tourPreference.Car,
-		Boat:           tourPreference.Bike,
-		Tags:           strings.Split(tourPreference.Tags, "|"),
+		ID:         tourPreference.ID,
+		CreatorId:  tourPreference.CreatorId,
+		Difficulty: tourDifficulty,
+		Walk:       tourPreference.Walk,
+		Bike:       tourPreference.Bike,
+		Car:        tourPreference.Car,
+		Boat:       tourPreference.Bike,
+		Tags:       strings.Split(tourPreference.Tags, "|"),
 	}
 
 	return tourPreferenceDTO
