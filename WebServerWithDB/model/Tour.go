@@ -2,6 +2,15 @@ package model
 
 import "strings"
 
+type MapObjectType int
+
+const (
+	Other MapObjectType = iota
+	Restaurant
+	WC
+	Parking
+)
+
 type Tour struct {
 	ID             int          `gorm:"primaryKey" json:"id"`
 	Name           string       `json:"name"`
@@ -27,10 +36,20 @@ type Checkpoint struct {
 	Name                 string  `json:"name"`
 	Description          string  `json:"description"`
 	Pictures             string  `json:"pictures"`
-	RequiredTime         float64     `json:"requiredTimeInSeconds"`
+	RequiredTime         float64 `json:"requiredTimeInSeconds"`
 	CheckpointSecret     string  `json:"checkpointSecret"`
 	EncounterID          int     `json:"encounterId"`
 	IsSecretPrerequisite bool    `json:"isSecretPrerequisite"`
+}
+
+type MapObject struct {
+	ID          int           `gorm:"primaryKey" json:"id"`
+	Name        string        `json:"name"`
+	Description string        `json:"description"`
+	PictureURL  string        `json:"pictureURL"`
+	Category    MapObjectType `json:"category"`
+	Longitude   float64       `json:"longitude"`
+	Latitude    float64       `json:"latitude"`
 }
 
 type Equipment struct {
@@ -106,4 +125,31 @@ func TourToDTO(tour *Tour) TourDTO {
 		TourRatings:    nil,
 		Closed:         tour.Closed,
 	}
+}
+
+func (mapObject *MapObject) MapToMapObjectDTO() MapObjectDTO {
+	var category string
+
+	switch mapObject.Category {
+	case Other:
+		category = "Other"
+	case Restaurant:
+		category = "Restaurant"
+	case WC:
+		category = "WC"
+	default:
+		category = "Parking"
+	}
+
+	mapObjectDTO := MapObjectDTO{
+		ID:          mapObject.ID,
+		Name:        mapObject.Name,
+		Description: mapObject.Description,
+		PictureURL:  mapObject.PictureURL,
+		Category:    category,
+		Longitude:   mapObject.Longitude,
+		Latitude:    mapObject.Latitude,
+	}
+
+	return mapObjectDTO
 }

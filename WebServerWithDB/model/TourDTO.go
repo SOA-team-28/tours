@@ -1,6 +1,8 @@
 package model
 
-import "strings"
+import (
+	"strings"
+)
 
 type CheckpointDTO struct {
 	ID                   int      `json:"id"`
@@ -11,7 +13,7 @@ type CheckpointDTO struct {
 	Name                 string   `json:"name"`
 	Description          string   `json:"description"`
 	Pictures             []string `json:"pictures"`
-	RequiredTime         float64      `json:"requiredTimeInSeconds"`
+	RequiredTime         float64  `json:"requiredTimeInSeconds"`
 	CheckpointSecret     string   `json:"checkpointSecret"`
 	EncounterID          int      `json:"encounterId"`
 	IsSecretPrerequisite bool     `json:"isSecretPrerequisite"`
@@ -32,6 +34,43 @@ type TourDTO struct {
 	TourTimes      []int           `json:"tourTimes"`
 	TourRatings    []int           `json:"tourRatings"`
 	Closed         bool            `json:"closed"`
+}
+
+type MapObjectDTO struct {
+	ID          int     `json:"id"`
+	Name        string  `json:"name"`
+	Description string  `json:"description"`
+	PictureURL  string  `json:"pictureURL"`
+	Category    string  `json:"category"`
+	Longitude   float64 `json:"longitude"`
+	Latitude    float64 `json:"latitude"`
+}
+
+func (mapObjectDto *MapObjectDTO) MapToMapObject() MapObject {
+	var category MapObjectType
+
+	switch mapObjectDto.Category {
+	case "Other":
+		category = Other
+	case "Restaurant":
+		category = Restaurant
+	case "WC":
+		category = WC
+	default:
+		category = Parking
+	}
+
+	mapObject := MapObject{
+		ID:          mapObjectDto.ID,
+		Name:        mapObjectDto.Name,
+		Description: mapObjectDto.Description,
+		PictureURL:  mapObjectDto.PictureURL,
+		Category:    category,
+		Longitude:   mapObjectDto.Longitude,
+		Latitude:    mapObjectDto.Latitude,
+	}
+
+	return mapObject
 }
 
 func (tourDTO *TourDTO) MapToTour() (Tour, []Equipment, []Checkpoint) {

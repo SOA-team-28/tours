@@ -26,13 +26,15 @@ func startServer() {
 	tourHandler := handler.NewTourHandler(database)
 	tourHandler.RegisterRoutes(router)
 
+	mapObjectHandler := handler.NewMapObjectHandler(database)
+	mapObjectHandler.RegisterRoutes(router)
+
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./static")))
 	println("Server starting")
 	log.Fatal(http.ListenAndServe(":8081", router))
 }
 
 func main() {
-
 
 	startServer()
 }

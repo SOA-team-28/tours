@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f946cd2f-de94-4350-afbd-af13f2e5f301" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/WebServerWithDB/handler/MapObjectHandler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WebServerWithDB/repo/MapObjectRepository.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WebServerWithDB/service/MapObjectService.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebServerWithDB/db/init.go" beforeDir="false" afterPath="$PROJECT_DIR$/WebServerWithDB/db/init.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebServerWithDB/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/WebServerWithDB/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebServerWithDB/model/Tour.go" beforeDir="false" afterPath="$PROJECT_DIR$/WebServerWithDB/model/Tour.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebServerWithDB/model/TourDTO.go" beforeDir="false" afterPath="$PROJECT_DIR$/WebServerWithDB/model/TourDTO.go" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultGoTemplateProperty": "Go File",
+    "Go Build.go build database-example.executor": "Debug",
+    "git-widget-placeholder": "feat/map-objects"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="go build database-example" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="tours" />
+      <working_directory value="$PROJECT_DIR$/WebServerWithDB" />
+      <kind value="PACKAGE" />
+      <package value="database-example" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/WebServerWithDB/main.go" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.go build database-example" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/WebServerWithDB/handler/MapObjectHandler.go</url>
+          <line>50</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/WebServerWithDB/handler/MapObjectHandler.go</url>
+          <line>59</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
