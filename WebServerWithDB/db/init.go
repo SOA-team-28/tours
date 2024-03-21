@@ -20,9 +20,9 @@ func InitDB() *gorm.DB {
 	}
 	err = db.AutoMigrate(
 
+		&model.Tour{},
 		&model.Checkpoint{},
 		&model.Equipment{},
-		&model.Tour{},
 		&model.MapObject{},
 		&model.TourPreference{})
 

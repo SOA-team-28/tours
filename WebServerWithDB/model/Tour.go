@@ -20,34 +20,34 @@ const (
 )
 
 type Tour struct {
-	ID             int          `gorm:"primaryKey" json:"id"`
-	Name           string       `json:"name"`
-	Description    string       `json:"description"`
-	DemandingLevel string       `json:"demandignessLevel"`
-	Price          float64      `json:"price"`
-	Tags           string       `json:"tags"`
-	AuthorID       int          `json:"authorId"`
-	Status         string       `json:"status"`
-	Equipment      []Equipment  `gorm:"many2many:tour_equipments;" json:"equipment"`
-	Checkpoints    []Checkpoint `gorm:"many2many:tour_checkpoints;" json:"checkpoints"`
-	TourTimes      string       `json:"tourTimes"`
-	TourRatings    string       `json:"tourRatings"`
-	Closed         bool         `json:"closed"`
+    ID             int          `gorm:"primaryKey" json:"id"`
+    Name           string       `json:"name"`
+    Description    string       `json:"description"`
+    DemandingLevel string       `json:"demandignessLevel"`
+    Price          float64      `json:"price"`
+    Tags           string       `json:"tags"`
+    AuthorID       int          `json:"authorId"`
+    Status         string       `json:"status"`
+    Equipment      []Equipment  `gorm:"many2many:tour_equipments;" json:"equipment"`
+    Checkpoints    []Checkpoint `gorm:"foreignKey:TourID" json:"checkpoints"` // Changed from many-to-many to one-to-many
+    TourTimes      string       `json:"tourTimes"`
+    TourRatings    string       `json:"tourRatings"`
+    Closed         bool         `json:"closed"`
 }
 
 type Checkpoint struct {
-	ID                   int     `gorm:"primaryKey" json:"id"`
-	TourID               int     `json:"tourId"`
-	AuthorID             int     `json:"authorId"`
-	Longitude            float64 `json:"longitude"`
-	Latitude             float64 `json:"latitude"`
-	Name                 string  `json:"name"`
-	Description          string  `json:"description"`
-	Pictures             string  `json:"pictures"`
-	RequiredTime         float64 `json:"requiredTimeInSeconds"`
-	CheckpointSecret     string  `json:"checkpointSecret"`
-	EncounterID          int     `json:"encounterId"`
-	IsSecretPrerequisite bool    `json:"isSecretPrerequisite"`
+    ID                   int     `gorm:"primaryKey" json:"id"`
+    TourID               int     `json:"tourId"`
+    AuthorID             int     `json:"authorId"`
+    Longitude            float64 `json:"longitude"`
+    Latitude             float64 `json:"latitude"`
+    Name                 string  `json:"name"`
+    Description          string  `json:"description"`
+    Pictures             string  `json:"pictures"`
+    RequiredTime         float64 `json:"requiredTimeInSeconds"`
+    CheckpointSecret     string  `json:"checkpointSecret"`
+    EncounterID          int     `json:"encounterId"`
+    IsSecretPrerequisite bool    `json:"isSecretPrerequisite"`
 }
 
 type MapObject struct {
@@ -66,10 +66,6 @@ type Equipment struct {
 	Description string `json:"description"`
 }
 
-type TourCheckpoint struct {
-	TourID       int `json:"tourId"`
-	CheckpointID int `json:"checkpointId"`
-}
 
 type TourEquipment struct {
 	TourID      int `json:"tourId"`
@@ -197,4 +193,40 @@ func (mapObject *MapObject) MapToMapObjectDTO() MapObjectDTO {
 	}
 
 	return mapObjectDTO
+}
+
+func CheckpointToDTO(cp *Checkpoint) CheckpointDTO {
+	pictures := strings.Split(cp.Pictures, "|")
+	return CheckpointDTO{
+		ID:                   cp.ID,
+		TourID:               cp.TourID,
+		AuthorID:             cp.AuthorID,
+		Longitude:            cp.Longitude,
+		Latitude:             cp.Latitude,
+		Name:                 cp.Name,
+		Description:          cp.Description,
+		Pictures:             pictures,
+		RequiredTime:         cp.RequiredTime,
+		CheckpointSecret:     cp.CheckpointSecret,
+		EncounterID:          cp.EncounterID,
+		IsSecretPrerequisite: cp.IsSecretPrerequisite,
+	}
+}
+
+func DTOToCheckpoint(dto *CheckpointDTO) Checkpoint {
+	pictures := strings.Join(dto.Pictures, "|")
+	return Checkpoint{
+		ID:                   dto.ID,
+		TourID:               dto.TourID,
+		AuthorID:             dto.AuthorID,
+		Longitude:            dto.Longitude,
+		Latitude:             dto.Latitude,
+		Name:                 dto.Name,
+		Description:          dto.Description,
+		Pictures:             pictures,
+		RequiredTime:         dto.RequiredTime,
+		CheckpointSecret:     dto.CheckpointSecret,
+		EncounterID:          dto.EncounterID,
+		IsSecretPrerequisite: dto.IsSecretPrerequisite,
+	}
 }

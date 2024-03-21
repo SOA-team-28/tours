@@ -42,19 +42,20 @@ func (handler *CheckpointHandler) Get(writer http.ResponseWriter, req *http.Requ
 		writer.WriteHeader(http.StatusNotFound)
 		return
 	}
+	checkpointDTO := model.CheckpointToDTO(checkpoint)
 	writer.WriteHeader(http.StatusOK)
-	json.NewEncoder(writer).Encode(checkpoint)
+	json.NewEncoder(writer).Encode(checkpointDTO)
 }
 
 func (handler *CheckpointHandler) Create(writer http.ResponseWriter, req *http.Request) {
-	var checkpoint model.Checkpoint
-	err := json.NewDecoder(req.Body).Decode(&checkpoint)
+	var checkpointDTO model.CheckpointDTO
+	err := json.NewDecoder(req.Body).Decode(&checkpointDTO)
 	if err != nil {
 		log.Println("Error while parsing JSON:", err)
 		writer.WriteHeader(http.StatusBadRequest)
 		return
 	}
-
+	checkpoint := model.DTOToCheckpoint(&checkpointDTO)
 	checkpoint.ID = int(checkpoint.ID)
 
 	err = handler.CheckpointService.Create(&checkpoint)
