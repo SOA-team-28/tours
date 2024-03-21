@@ -24,6 +24,8 @@ func (h *TourPreferenceHandler) RegisterRoutes(router *mux.Router) {
 	router.HandleFunc("/tourPreferences/get-by-creator/{id}", h.GetAllByCreatorId).Methods("GET")
 	router.HandleFunc("/tourPreferences-get-all", h.GetAll).Methods("GET")
 	router.HandleFunc("/tourPreferences", h.Create).Methods("POST")
+	router.HandleFunc("/tourPreferences", h.Update).Methods("PUT")
+	router.HandleFunc("/tourPreferences/{id}", h.Delete).Methods("DELETE")
 }
 
 func (handler *TourPreferenceHandler) GetAllByCreatorId(writer http.ResponseWriter, req *http.Request) {
@@ -85,17 +87,7 @@ func (handler *TourPreferenceHandler) Create(writer http.ResponseWriter, req *ht
 		writer.WriteHeader(http.StatusBadRequest)
 		return
 	}
-	/*
-		params := mux.Vars(req)
-		status := params["status"]
-		userIdString := params["userId"]
-		userId, err := strconv.Atoi(userIdString)
-		if err != nil {
-			log.Println("Error parsing ID:", err)
-			writer.WriteHeader(http.StatusBadRequest)
-			return
-		}
-	*/
+
 	tourPreference := tourPreferenceDTO.MapToTourPreference()
 
 	var createdDTO = handler.TourPreferenceService.Create(&tourPreference)
@@ -111,4 +103,51 @@ func (handler *TourPreferenceHandler) Create(writer http.ResponseWriter, req *ht
 	writer.WriteHeader(http.StatusCreated)
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Write(jsonResponse)
+}
+
+func (handler *TourPreferenceHandler) Update(writer http.ResponseWriter, req *http.Request) {
+
+	var tourPreferenceDTO model.TourPreferenceDTO
+	err := json.NewDecoder(req.Body).Decode(&tourPreferenceDTO)
+	if err != nil {
+		log.Println("Error while parsing JSON:", err)
+		writer.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	tourPreference := tourPreferenceDTO.MapToTourPreference()
+
+	var updatedDTO = handler.TourPreferenceService.Update(&tourPreference)
+
+	// Serijalizacija mapObjectDTO u JSON format
+	jsonResponse, err := json.Marshal(updatedDTO)
+	if err != nil {
+		http.Error(writer, "Failed to serialize response", http.StatusInternalServerError)
+		return
+	}
+
+	// Postavljanje Content-Type zaglavlja na application/json
+	writer.WriteHeader(http.StatusOK)
+	writer.Header().Set("Content-Type", "application/json")
+	writer.Write(jsonResponse)
+}
+
+func (handler *TourPreferenceHandler) Delete(writer http.ResponseWriter, req *http.Request) {
+	params := mux.Vars(req)
+	idString := params["id"]
+	id, err := strconv.Atoi(idString)
+	if err != nil {
+		log.Println("Error parsing ID:", err)
+		writer.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	err = handler.TourPreferenceService.Delete(id)
+	if err != nil {
+		log.Println("Error deleting TourPreference:", err)
+		writer.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	writer.WriteHeader(http.StatusOK)
 }

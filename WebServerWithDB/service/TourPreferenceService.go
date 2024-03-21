@@ -4,6 +4,7 @@ import (
 	"database-example/model"
 	"database-example/repo"
 	"gorm.io/gorm"
+	"log"
 )
 
 type TourPreferenceService struct {
@@ -32,4 +33,19 @@ func (service *TourPreferenceService) Create(tourPreference *model.TourPreferenc
 	createdTourPreference, _ := service.TourPreferenceRepo.Create(tourPreference)
 	createdTourPreferenceDTO := createdTourPreference.MapToTourPreferenceDTO()
 	return &createdTourPreferenceDTO
+}
+
+func (service *TourPreferenceService) Update(tourPreference *model.TourPreference) *model.TourPreferenceDTO {
+	updatedTourPreference, _ := service.TourPreferenceRepo.Update(tourPreference)
+	updatedTourPreferenceDTO := updatedTourPreference.MapToTourPreferenceDTO()
+	return &updatedTourPreferenceDTO
+}
+
+func (service *TourPreferenceService) Delete(id int) error {
+	err := service.TourPreferenceRepo.Delete(id)
+	if err != nil {
+		log.Println("Error deleting TourPreference:", err)
+		return err
+	}
+	return nil
 }

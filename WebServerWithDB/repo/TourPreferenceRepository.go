@@ -42,6 +42,27 @@ func (repo *TourPreferenceRepository) Create(tourPreference *model.TourPreferenc
 	return tourPreference, nil
 }
 
+func (repo *TourPreferenceRepository) Update(tourPreference *model.TourPreference) (*model.TourPreference, error) {
+	dbResult := repo.DatabaseConnection.Save(tourPreference)
+	if dbResult.Error != nil {
+		return nil, dbResult.Error
+	}
+	println("Rows affected: ", dbResult.RowsAffected)
+	return tourPreference, nil
+}
+
+func (repo *TourPreferenceRepository) Delete(id int) error {
+	var tourPreference model.TourPreference
+	dbResult := repo.DatabaseConnection.Where("id = ?", id).Delete(&tourPreference)
+	if dbResult.Error != nil {
+		return dbResult.Error
+	}
+	if dbResult.RowsAffected == 0 {
+		return errors.New("TourPreference not found")
+	}
+	return nil
+}
+
 func validateTransportation(walk, bike, car, boat int) {
 	if walk < 0 || walk > 3 {
 		panic(errors.New("Invalid value for Walk. It should be between 0 and 3."))

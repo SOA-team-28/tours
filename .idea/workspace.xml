@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f946cd2f-de94-4350-afbd-af13f2e5f301" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebServerWithDB/model/Tour.go" beforeDir="false" afterPath="$PROJECT_DIR$/WebServerWithDB/model/Tour.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebServerWithDB/model/TourDTO.go" beforeDir="false" afterPath="$PROJECT_DIR$/WebServerWithDB/model/TourDTO.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebServerWithDB/handler/TourPreferenceHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/WebServerWithDB/handler/TourPreferenceHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebServerWithDB/repo/TourPreferenceRepository.go" beforeDir="false" afterPath="$PROJECT_DIR$/WebServerWithDB/repo/TourPreferenceRepository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebServerWithDB/service/TourPreferenceService.go" beforeDir="false" afterPath="$PROJECT_DIR$/WebServerWithDB/service/TourPreferenceService.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,13 +25,13 @@
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultGoTemplateProperty": "Go File",
-    "Go Build.go build database-example.executor": "Run",
-    "git-widget-placeholder": "feat/tour-preferences"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;Go Build.go build database-example.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feat/tour-preferences&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="go build database-example" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="tours" />
